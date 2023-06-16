@@ -3,7 +3,7 @@ $(document).ready(listarRoupas);
 function listarRoupas() {
 
     $.ajax({
-        url: 'http://localhost:3306/api/roupa/list',
+        url: 'http://localhost:8090/api/roupa/list',
         type: 'get',
         dataType: 'json',
         success: function (result) {

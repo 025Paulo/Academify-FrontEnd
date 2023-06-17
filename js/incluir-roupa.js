@@ -6,7 +6,7 @@ $('#form-inserir-roupa').submit(function (event) {
 
     //Criar formData
     var formData = {
-        'matricula': $('#input-Tipo').val(),
+        'tipo': $('#input-Tipo').val(),
         'nome': $('#input-Marca').val(),
         'Preço': nascimento.toISOString(),
     };

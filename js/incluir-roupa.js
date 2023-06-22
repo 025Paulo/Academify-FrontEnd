@@ -1,17 +1,17 @@
-$('#form-inserir-roupa').submit(function (event) {
+$('#form-incluir-roupa').submit(function (event) {
 
     event.preventDefault();
 
-    nascimento = new Number($('#input-preço').val());
+    preço = new Number($('#input-preço').val());
 
     //Criar formData
     var formData = {
         'tipo': $('#input-Tipo').val(),
         'nome': $('#input-Marca').val(),
-        'Preço': nascimento.toISOString(),
+        'tamanho': $('#input-tamanho').val(),
+        'descriçao': $('#input-descriçao').val(),
+        'Preço': $('#input-Preço').val(),
     };
-
-    console.log(JSON.stringify(formData));
 
     $.ajax({
         headers: {
@@ -19,7 +19,7 @@ $('#form-inserir-roupa').submit(function (event) {
             'Content-Type': 'application/json',
         },
         type: 'POST',
-        url: 'http://localhost:8080/api/aluno/create',
+        url: 'http://localhost:8080/api/roupa/create',
         data: JSON.stringify(formData),
         dataType: 'json',
         success: function (data) {

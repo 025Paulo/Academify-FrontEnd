@@ -11,22 +11,23 @@ function GetURLParameter(sParam) {
     }
 }
 
-var id_aluno = GetURLParameter("id");
+var id_roupa = GetURLParameter("id");
 
 $('#form-editar-roupa').submit(function (event) {
 
     event.preventDefault();
 
-    preço = new Date($('#input-preço').val());
+    preço = new Number($('#input-preço').val());
 
     var formData = {
         'id': id_roupa,
         'tipo': $('#input-tipo').val(),
         'marca': $('#input-marca').val(),
-        'preço': preço.toISOString(),
+        'tamanho': $('#input-tamanho').val(),
+        'descriçao': $('#input-descriçao').val(),
+        'preço': $('#input-Preço').val(),
     };
 
-    console.log(JSON.stringify(formData));
 
     $.ajax({
         headers: {
@@ -35,10 +36,9 @@ $('#form-editar-roupa').submit(function (event) {
         },
         type: 'PUT',
         url: 'http://localhost:8080/api/roupa/edit',
-        data: JSON.stringify(formData),
         dataType: 'json',
         success: function (data) {
-            location.href = 'listar-alunos.html';
+            location.href = 'listar-roupas.html';
         },
         error: function (data) {
             $('#div-alert-message').prepend(data.responseText);
@@ -52,30 +52,16 @@ $('#form-editar-roupa').submit(function (event) {
     $('#div-alert-message').hide();
 }
 
-function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getUTCMonth() + 1),
-        day = '' + d.getUTCDate(),
-        year = d.getUTCFullYear();
-
-    if (month.length < 2)
-        month = '0' + month;
-    if (day.length < 2)
-        day = '0' + day;
-
-    return [year, month, day].join('-');
-}
-
 
 $(document).ready(function () {
     $.ajax({
-        url: 'http://localhost:8080/api/roupa/getById/' + id_aluno,
+        url: 'http://localhost:8080/api/roupa/getById/' + id_roupa,
         type: 'GET',
         dataType: 'json',
         success: function (data) {
             $("#input-tipo").val(data.tipo);
             $("#input-marca").val(data.marca);
-            $("#input-preço").val(formatDate(new Date(data.preço)));
+            $("#input-preço").val(data.preço);
         }
     })
 

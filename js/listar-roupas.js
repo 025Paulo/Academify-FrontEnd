@@ -10,18 +10,22 @@ function listarRoupas() {
             console.log(result);
             var html = '';
             $.each(result, function (i, data) {
-                html += `<tr><td>` + data.nome + `</td>`;
+                html += `<tr><td>` + data.tipo + `</td>`;
+                html += `<tr><td>` + data.marca + `</td>`;
+                html += `<tr><td>` + data.tamanho + `</td>`;
                 html += `<td>` + data.descricao + `</td>`;
+                html += `<td>` + data.preco + `</td>`;
                 html += `<td><a href="editar-roupas.html?id=` + data.id + `"><i class="bi bi-pencil-fill"></i></a>`;
                 html += ` <a href="visualizar-roupas.html?id=` + data.id + `"><i class="bi bi-search"></i></a>`;
                 html += ` <a href="#" onclick="removerRoupa(` + data.id + `)"><i class="bi bi-archive-fill"></i></a></td></tr>`;
 
-                $("#tbListarRoupasBody").html(html);
+                $("#tbListarRoupas").html(html);
             });
 
-            let table = new DataTable('#tbListarRoupas');
         }
     })
+
+    let table = new DataTable('#tbListarRoupas');
 
 
 }
